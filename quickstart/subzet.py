@@ -40,6 +40,7 @@ class Solution:
                 res.append(list(tmp))
         return res
 
+
 if __name__ == '__main__':
     nums=[1,2,3]
     solution = Solution()
