@@ -69,7 +69,7 @@ if __name__ == '__main__':
     a.left = b
     a.right = c
     b.left = d
-    b.right = f
+    b.right = e
     c.left = f
 
     print(Solution().levelOrderBottom(a))

@@ -87,8 +87,10 @@ if __name__ == '__main__':
     c = TreeNode(3)
     d = TreeNode(4)
     e = TreeNode(5)
+    f = TreeNode(6)
     a.left = b
     a.right = c
     b.left = d
     b.right = e
+    c.left = f
     print(Solution().levelOrder(a))
