@@ -42,7 +42,6 @@ class Solution:
         result = []
         if not root:
             return result
-
         queue = [root]
         while queue:
             length = len(queue)
