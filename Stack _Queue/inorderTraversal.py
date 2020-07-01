@@ -44,9 +44,24 @@ class Solution:
                 stack.append(root)
                 root = root.left  # 一直向左
             # 弹出
-            val = stack.pop()
-            result.append(val.val)
-            root = val.right
+            node = stack.pop()
+            result.append(node.val)
+            root = node.right
+        return result
+
+    def inorderTraversal2(self, root: TreeNode) -> List[int]:
+        stack, result = [], []
+        node = root
+
+        while len(stack) > 0 or node:
+            if node:
+                stack.append(node)
+                node = node.left
+            else:
+                node = stack.pop()
+                result.append(node.val)
+                node = node.right
+
         return result
 
 
