@@ -39,8 +39,10 @@ minStack.getMin();   --> 返回 -2.
 pop、top 和 getMin 操作总是在 非空栈 上调用。
 """
 
-
 # 思路：用两个栈实现，一个最小栈始终保证最小值在顶部
+import math
+
+
 class MinStack:
 
     def __init__(self):
@@ -75,9 +77,33 @@ class MinStack:
         min = self.min[len(self.min) - 1]
         return min
 
+
 # Your MinStack object will be instantiated and called as such:
 # obj = MinStack()
 # obj.push(x)
 # obj.pop()
 # param_3 = obj.top()
 # param_4 = obj.getMin()
+class MinStack2:
+    def __init__(self):
+        self.stack = []
+        self.min_stack = [math.inf]
+
+    def push(self, x: int) -> None:
+        self.stack.append(x)
+        self.min_stack.append(min(x, self.min_stack[-1]))
+
+    def pop(self) -> None:
+        self.stack.pop()
+        self.min_stack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.min_stack[-1]
+
+# 作者：LeetCode-Solution
+# 链接：https://leetcode-cn.com/problems/min-stack/solution/zui-xiao-zhan-by-leetcode-solution/
+# 来源：力扣（LeetCode）
+# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
