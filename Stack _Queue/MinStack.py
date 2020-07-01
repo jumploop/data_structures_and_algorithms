@@ -103,7 +103,27 @@ class MinStack2:
     def getMin(self) -> int:
         return self.min_stack[-1]
 
+
 # 作者：LeetCode-Solution
 # 链接：https://leetcode-cn.com/problems/min-stack/solution/zui-xiao-zhan-by-leetcode-solution/
 # 来源：力扣（LeetCode）
 # 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+class MinStack3:
+
+    def __init__(self):
+        self.stack = []
+
+    def push(self, x: int) -> None:
+        if len(self.stack) > 0:
+            self.stack.append((x, min(x, self.stack[-1][1])))
+        else:
+            self.stack.append((x, x))
+
+    def pop(self) -> int:
+        return self.stack.pop()[0]
+
+    def top(self) -> int:
+        return self.stack[-1][0]
+
+    def getMin(self) -> int:
+        return self.stack[-1][1]
