@@ -72,7 +72,6 @@ class Solution:
 
     # 思路 2: 2-pass DP，dist(i, j) = max{dist(i - 1, j), dist(i + 1, j), dist(i, j - 1), dist(i, j + 1)} + 1
     def updateMatrix2(self, matrix: List[List[int]]) -> List[List[int]]:
-
         if len(matrix) == 0 or len(matrix[0]) == 0:
             return matrix
 
