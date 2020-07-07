@@ -27,3 +27,9 @@ class Solution:
             n >>= 1
             count += 1
         return m << count
+
+    def rangeBitwiseAnd2(self, m: int, n: int) -> int:
+        while m < n:
+            n = n & (n - 1)
+        return m & n
+#
