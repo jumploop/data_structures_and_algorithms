@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2020/7/7 11:44
 # @Author  : 一叶知秋
-# @File    : search.py
+# @File    : binary_search.py
 # @Software: PyCharm
 """
 704. 二分查找
