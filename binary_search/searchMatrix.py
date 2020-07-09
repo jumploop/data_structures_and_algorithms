@@ -52,7 +52,7 @@ class Solution:
             return False
         row = len(matrix)
         col = len(matrix[0])
-        n=np.array(matrix)
+        n = np.array(matrix)
         # matrix=np.matrix.flatten(n).tolist()
         # matrix = sum(matrix, [])
         matrix = [num for lst in matrix for num in lst]
@@ -70,6 +70,21 @@ class Solution:
                 return True
         if matrix[left] == target or matrix[right] == target:
             return True
+        return False
+
+    def searchMatrix3(self, matrix: List[List[int]], target: int) -> bool:
+        if not matrix or not matrix[0]:
+            return False
+        left, right = 0, len(matrix) * len(matrix[0]) - 1
+        array = [column for row in matrix for column in row]
+        while left <= right:
+            mid = ((right - left) >> 1) + left
+            if array[mid] == target:
+                return True
+            elif array[mid] < target:
+                left = mid + 1  # ascending
+            else:
+                right = mid - 1
         return False
 
 
