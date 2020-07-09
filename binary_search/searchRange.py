@@ -32,6 +32,7 @@
 """
 
 
+# 思路：核心点就是找第一个 target 的索引，和最后一个 target 的索引，所以用两次二分搜索分别找第一次和最后一次的位置
 class Solution:
     """
     @param A: an integer sorted array
