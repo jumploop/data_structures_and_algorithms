@@ -29,10 +29,12 @@
 如果你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题，那么你的算法会很加分。
 """
 from typing import List
+from copy import deepcopy
 
-# 动态规划
+# 动态规划，自底向上
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
+        # 动态规划，自底向上
         if not triangle or not triangle[0]:
             return 0
         dp = triangle[-1].copy()
@@ -43,14 +45,35 @@ class Solution:
         return dp[0]
 
     def minimumTotal2(self, triangle: List[List[int]]) -> int:
+        triangle=deepcopy(triangle)
+        # 动态规划，自底向上
         n = len(triangle)
         for row in range(n - 2, -1, -1):
             for col in range(len(triangle[row])):
                 triangle[row][col] += min(triangle[row + 1][col], triangle[row + 1][col + 1])
         return triangle[0][0]
 
+    def minimumTotal3(self, triangle: List[List[int]]) -> int:
+        # 动态规划，自上向下
+        if (not triangle):
+            return 0
+        n = len(triangle)
+        if (n == 1):
+            return triangle[0][0]
+        for i in range(1, n):
+            for j in range(len(triangle[i])):
+                if (j == 0):
+                    triangle[i][j] += triangle[i - 1][j]
+                elif (j == len(triangle[i]) - 1):
+                    triangle[i][j] += triangle[i - 1][j - 1]
+                else:
+                    triangle[i][j] += min(triangle[i - 1][j - 1], triangle[i - 1][j])
+        print(triangle)
+        return min(triangle[-1])
+
 
 if __name__ == '__main__':
     triangle = [[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]
     print(Solution().minimumTotal(triangle))
     print(Solution().minimumTotal2(triangle))
+    print(Solution().minimumTotal3(triangle))
