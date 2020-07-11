@@ -31,6 +31,7 @@
 from typing import List
 from copy import deepcopy
 
+
 # 动态规划，自底向上
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
@@ -45,7 +46,7 @@ class Solution:
         return dp[0]
 
     def minimumTotal2(self, triangle: List[List[int]]) -> int:
-        triangle=deepcopy(triangle)
+        triangle = deepcopy(triangle)
         # 动态规划，自底向上
         n = len(triangle)
         for row in range(n - 2, -1, -1):
@@ -54,6 +55,7 @@ class Solution:
         return triangle[0][0]
 
     def minimumTotal3(self, triangle: List[List[int]]) -> int:
+        triangle = deepcopy(triangle)
         # 动态规划，自上向下
         if (not triangle):
             return 0
@@ -71,9 +73,25 @@ class Solution:
         print(triangle)
         return min(triangle[-1])
 
+    def minimumTotal4(self, triangle: List[List[int]]) -> int:
+        # 动态规划，自上向下
+        if len(triangle) == 0:
+            return 0
+        dp = triangle[0]
+        print(dp)
+        for row in triangle[1:]:
+            dp_new = [row[0] + dp[0]]
+            for i in range(len(dp) - 1):
+                dp_new.append(row[i + 1] + min(dp[i], dp[i + 1]))
+            dp_new.append(row[-1] + dp[-1])
+            dp = dp_new
+        print(dp)
+        return min(dp)
+
 
 if __name__ == '__main__':
     triangle = [[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]
     print(Solution().minimumTotal(triangle))
     print(Solution().minimumTotal2(triangle))
     print(Solution().minimumTotal3(triangle))
+    print(Solution().minimumTotal4(triangle))
