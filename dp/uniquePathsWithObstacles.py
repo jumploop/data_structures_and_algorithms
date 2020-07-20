@@ -81,3 +81,4 @@ if __name__ == '__main__':
     n = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
     print(n)
     print(Solution().uniquePathsWithObstacles(n))
+    print(Solution().uniquePathsWithObstacles2(n))
