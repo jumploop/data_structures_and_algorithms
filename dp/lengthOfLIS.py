@@ -28,17 +28,31 @@ class Solution:
         if len(nums) == 0:
             return 0
         seq = [nums[0]]
-        print(seq)
+        # print(seq)
         for i in range(1, len(nums)):
             ins = bisect.bisect_left(seq, nums[i])
             if ins == len(seq):
                 seq.append(nums[i])
             else:
                 seq[ins] = nums[i]
-            print(seq)
+            # print(seq)
         return len(seq)
+
+    def lengthOfLIS2(self, nums: List[int]) -> int:
+        """该方法超时"""
+        if not nums:
+            return 0
+        dp = []
+        for i in range(len(nums)):
+            dp.append(1)
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+            print(dp)
+        return max(dp)
 
 
 if __name__ == '__main__':
     nums = [10, 9, 2, 5, 3, 7, 101, 18]
     print(Solution().lengthOfLIS(nums))
+    print(Solution().lengthOfLIS2(nums))
