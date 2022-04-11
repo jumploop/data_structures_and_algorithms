@@ -70,9 +70,8 @@ class Solution:
                     right = mid - 1
                 else:
                     left = mid + 1
+            elif nums[mid] < target <= nums[-1]:
+                left = mid + 1
             else:
-                if nums[mid] < target <= nums[len(nums) - 1]:
-                    left = mid + 1
-                else:
-                    right = mid - 1
+                right = mid - 1
         return -1

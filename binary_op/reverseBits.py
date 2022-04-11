@@ -38,7 +38,7 @@
 class Solution:
     def reverseBits(self, n: int) -> int:
         # return int("0b" + ("0" * 32 + bin(n)[2:])[-32:][::-1], base=2)
-        return int('0b' + bin(n)[2:].zfill(32)[::-1], 2)
+        return int(f'0b{bin(n)[2:].zfill(32)[::-1]}', 2)
 
     def reverseBits2(self, n: int) -> int:
         res = 0

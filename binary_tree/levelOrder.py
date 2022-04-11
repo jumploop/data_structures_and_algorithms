@@ -48,10 +48,10 @@ class Solution:
         if not root:
             return result
         queue = [root]
-        while len(queue) > 0:
+        while queue:
             stack = []
             length = len(queue)
-            for i in range(length):
+            for _ in range(length):
                 level = queue.pop(0)
                 stack.append(level.val)
                 if level.left:

@@ -39,14 +39,11 @@ class Solution:
         stack = []
         Max = 0
         for i in range(len(heights)):
-            if i == len(heights):
-                cur = 0
-            else:
-                cur = heights[i]
+            cur = 0 if i == len(heights) else heights[i]
             # 当前高度小于栈，则将栈内元素都弹出计算面积
-            while stack and cur <= heights[stack[len(stack) - 1]]:
-                pop = stack[len(stack) - 1]
-                stack = stack[:len(stack) - 1]
+            while stack and cur <= heights[stack[-1]]:
+                pop = stack[-1]
+                stack = stack[:-1]
                 h = heights[pop]
                 # 计算宽度
                 w = i

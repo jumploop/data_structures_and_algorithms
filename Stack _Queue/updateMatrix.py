@@ -45,7 +45,7 @@ from typing import List
 #  BFS 从0进队列，弹出之后计算上下左右的结果，将上下左右重新进队列进行二层操作
 class Solution:
     def updateMatrix(self, matrix: List[List[int]]) -> List[List[int]]:
-        if len(matrix) == 0 or len(matrix[0]) == 0:
+        if not matrix or len(matrix[0]) == 0:
             return matrix
 
         m, n = len(matrix), len(matrix[0])
@@ -63,16 +63,21 @@ class Solution:
             i, j = bfs.popleft()
             for dn_i, dn_j in neighbors:
                 n_i, n_j = i + dn_i, j + dn_j
-                if n_i >= 0 and n_i < m and n_j >= 0 and n_j < n:
-                    if dist[n_i][n_j] > dist[i][j] + 1:
-                        dist[n_i][n_j] = dist[i][j] + 1
-                        bfs.append((n_i, n_j))
+                if (
+                    n_i >= 0
+                    and n_i < m
+                    and n_j >= 0
+                    and n_j < n
+                    and dist[n_i][n_j] > dist[i][j] + 1
+                ):
+                    dist[n_i][n_j] = dist[i][j] + 1
+                    bfs.append((n_i, n_j))
 
         return dist
 
     # 思路 2: 2-pass DP，dist(i, j) = max{dist(i - 1, j), dist(i + 1, j), dist(i, j - 1), dist(i, j + 1)} + 1
     def updateMatrix2(self, matrix: List[List[int]]) -> List[List[int]]:
-        if len(matrix) == 0 or len(matrix[0]) == 0:
+        if not matrix or len(matrix[0]) == 0:
             return matrix
 
         m, n = len(matrix), len(matrix[0])
@@ -82,9 +87,9 @@ class Solution:
         for i in range(m):
             for j in range(n):
                 if matrix[i][j] == 1:
-                    if i - 1 >= 0:
+                    if i >= 1:
                         dist[i][j] = min(dist[i - 1][j] + 1, dist[i][j])
-                    if j - 1 >= 0:
+                    if j >= 1:
                         dist[i][j] = min(dist[i][j - 1] + 1, dist[i][j])
                 else:
                     dist[i][j] = 0
@@ -92,9 +97,9 @@ class Solution:
         for i in range(-1, -m - 1, -1):
             for j in range(-1, -n - 1, -1):
                 if matrix[i][j] == 1:
-                    if i + 1 < 0:
+                    if i < -1:
                         dist[i][j] = min(dist[i + 1][j] + 1, dist[i][j])
-                    if j + 1 < 0:
+                    if j < -1:
                         dist[i][j] = min(dist[i][j + 1] + 1, dist[i][j])
 
         return dist

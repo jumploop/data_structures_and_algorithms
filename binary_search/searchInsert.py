@@ -37,17 +37,15 @@ class Solution:
         right = len(nums) - 1
         while left + 1 < right:
             mid = (left + right) // 2
-            if nums[mid] == target:
+            if nums[mid] == target or nums[mid] <= target:
                 left = mid  # 标记开始位置
-            elif nums[mid] > target:
-                right = mid
             else:
-                left = mid
+                right = mid
         if nums[left] >= target:
             return left
         elif nums[right] >= target:
             return right
-        elif nums[right] < target:
+        else:
             return right + 1  # 目标值比所有值都大
         return 0
 

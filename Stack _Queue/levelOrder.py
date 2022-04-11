@@ -28,7 +28,7 @@ class Solution:
         while queue:
             stack = []
             length = len(queue)
-            for i in range(length):
+            for _ in range(length):
                 level = queue.popleft()
                 stack.append(level.val)
                 if level.left:

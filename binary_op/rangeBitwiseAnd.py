@@ -30,6 +30,6 @@ class Solution:
 
     def rangeBitwiseAnd2(self, m: int, n: int) -> int:
         while m < n:
-            n = n & (n - 1)
+            n &= n - 1
         return m & n
 #

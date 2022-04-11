@@ -63,11 +63,7 @@ class Solution:
                 l2 = l2.next
             head = head.next
         # 连接l1 未处理完节点
-        if l1:
-            head.next = l1
-        # 连接l1 未处理完节点
-        else:
-            head.next = l2
+        head.next = l1 or l2
         return dummy.next
 
     def sortList2(self, head: ListNode) -> ListNode:
@@ -88,7 +84,7 @@ class Solution:
             else:
                 h.next, right = right, right.next
             h = h.next
-        h.next = left if left else right
+        h.next = left or right
         return res.next
 
     def sortList3(self, head: ListNode) -> ListNode:

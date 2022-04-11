@@ -37,14 +37,7 @@ import numpy as np
 
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        if not matrix or not matrix[0]:
-            return False
-        for num in matrix:
-            if target in num:
-                return True
-            else:
-                continue
-        return False
+        return any(target in num for num in matrix) if matrix and matrix[0] else False
 
     def searchMatrix2(self, matrix: List[List[int]], target: int) -> bool:
         # 思路：将2纬数组转为1维数组 进行二分搜索

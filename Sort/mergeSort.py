@@ -14,9 +14,7 @@ def merge_sort(arr):
     mid = length // 2
     left = merge_sort(arr[:mid])
     right = merge_sort(arr[mid:])
-    # 合并两段数据
-    result = merge(left, right)
-    return result
+    return merge(left, right)
 
 
 def merge(left, right):

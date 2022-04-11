@@ -39,10 +39,7 @@ class Solution:
         """
         dp = [0] * (num + 1)
         for i in range(1, num + 1):
-            if (i % 2 == 1):
-                dp[i] = dp[i - 1] + 1
-            else:
-                dp[i] = dp[i // 2]
+            dp[i] = dp[i - 1] + 1 if (i % 2 == 1) else dp[i // 2]
         return dp
 
     # 由二进制的两条性质得到递推公式：
@@ -58,10 +55,7 @@ class Solution:
     # 空间复杂度：O(n)O(n)
 
     def countBits3(self, num: int) -> List[int]:
-        result = []
-        for i in range(num + 1):
-            result.append(self.count(i))
-        return result
+        return [self.count(i) for i in range(num + 1)]
 
     def count(self, n):
         count = 0

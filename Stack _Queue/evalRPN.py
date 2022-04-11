@@ -62,7 +62,7 @@ class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
         symbol = ["+", "-", "*", "/"]
         stack = []
-        if len(tokens) == 0:
+        if not tokens:
             return 0
         for token in tokens:
             if token in symbol:
@@ -112,27 +112,26 @@ class Solution:
 
     def evalRPN3(self, tokens: List[str]) -> int:
 
+        if not tokens:
+            return 0
         symbol = ["+", "-", "*", "/"]
         recList = []
 
-        if len(tokens) == 0:
-            return 0
-        else:
-            for c in tokens:
-                if c not in symbol:
-                    recList.append(c)
-                else:
-                    b = int(recList.pop())
-                    a = int(recList.pop())
-                    if c == "+":
-                        recList.append(str(a + b))
-                    elif c == "-":
-                        recList.append(str(a - b))
-                    elif c == "*":
-                        recList.append(str(a * b))
-                    elif c == "/":
-                        recList.append(str(int(a / b)))
-            return int(recList[0])
+        for c in tokens:
+            if c not in symbol:
+                recList.append(c)
+            else:
+                b = int(recList.pop())
+                a = int(recList.pop())
+                if c == "*":
+                    recList.append(str(a * b))
+                elif c == "+":
+                    recList.append(str(a + b))
+                elif c == "-":
+                    recList.append(str(a - b))
+                elif c == "/":
+                    recList.append(str(a // b))
+        return int(recList[0])
 
 
 if __name__ == '__main__':

@@ -49,33 +49,27 @@ class Solution:
         if not root:
             return root
         # 相等 直接返回root节点即可
-        if root == p or root == q:
+        if root in [p, q]:
             return root
         # Divide
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
-        # Conquer
-        # 左右两边都不为空，则根节点为祖先
-        if left and right:
-            return root
         if left:
-            return left
+            return root if right else left
         if right:
             return right
 
     def lowestCommonAncestor2(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         if not root:
             return root
-        if root.val == p.val or root.val == q.val:
+        if root.val in [p.val, q.val]:
             return root
 
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
-        if left and right:
-            return root
         if left:
-            return left
+            return root if right else left
         if right:
             return right
 

@@ -43,7 +43,7 @@ class Solution:
         for i in range(1, len(grid)):
             for j in range(1, len(grid[i])):
                 grid[i][j] = min(grid[i][j - 1], grid[i - 1][j]) + grid[i][j]
-        return grid[len(grid) - 1][len(grid[0]) - 1]
+        return grid[-1][len(grid[0]) - 1]
 
     def minPathSum2(self, grid: List[List[int]]) -> int:
         grid = deepcopy(grid)

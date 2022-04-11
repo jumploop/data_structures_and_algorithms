@@ -23,27 +23,23 @@ from collections import Counter
 
 class Solution:
     def singleNumber(self, nums: List[int]) -> List[int]:
-        result = []
         data = Counter(nums)
         print(data)
-        for k in data:
-            if data[k] == 1:
-                result.append(k)
-        return result
+        return [k for k in data if data[k] == 1]
 
     def singleNumber2(self, nums: List[int]) -> List[int]:
         diff = 0
-        for i in range(len(nums)):
-            diff ^= nums[i]
+        for num in nums:
+            diff ^= num
         print(diff)
         result = [diff, diff]
         # 去掉末尾的1后异或diff就得到最后一个1的位置
         diff = (diff & (diff - 1)) ^ diff
-        for i in range(len(nums)):
-            if diff & nums[i] == 0:
-                result[0] ^= nums[i]
+        for num_ in nums:
+            if diff & num_ == 0:
+                result[0] ^= num_
             else:
-                result[1] ^= nums[i]
+                result[1] ^= num_
         return result
 
     def singleNumber3(self, nums: List[int]) -> List[int]:

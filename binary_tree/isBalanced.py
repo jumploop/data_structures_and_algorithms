@@ -64,9 +64,7 @@ class Solution:
 
     def isBalanced2(self, root: TreeNode) -> bool:
         # 分治法
-        if self.maxDepth(root) == -1:
-            return False
-        return True
+        return self.maxDepth(root) != -1
 
     def maxDepth(self, root):
         if not root:

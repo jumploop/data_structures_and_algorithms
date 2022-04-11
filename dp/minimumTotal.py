@@ -75,14 +75,13 @@ class Solution:
 
     def minimumTotal4(self, triangle: List[List[int]]) -> int:
         # 动态规划，自上向下
-        if len(triangle) == 0:
+        if not triangle:
             return 0
         dp = triangle[0]
         print(dp)
         for row in triangle[1:]:
             dp_new = [row[0] + dp[0]]
-            for i in range(len(dp) - 1):
-                dp_new.append(row[i + 1] + min(dp[i], dp[i + 1]))
+            dp_new.extend(row[i + 1] + min(dp[i], dp[i + 1]) for i in range(len(dp) - 1))
             dp_new.append(row[-1] + dp[-1])
             dp = dp_new
         print(dp)

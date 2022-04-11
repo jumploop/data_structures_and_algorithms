@@ -53,7 +53,7 @@ class Solution:
         stack, result = [], []
         node = root
 
-        while len(stack) > 0 or node:
+        while stack or node:
             if node:
                 stack.append(node)
                 node = node.left

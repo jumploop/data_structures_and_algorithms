@@ -38,7 +38,7 @@ def preorderTraversal2(node):
     if node is None:
         return
     stack = [node]
-    while len(stack) > 0:
+    while stack:
         print(node.val)
         if node.right:
             stack.append(node.right)

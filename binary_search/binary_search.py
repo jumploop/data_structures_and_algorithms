@@ -38,7 +38,7 @@ class Solution:
            :type target: int
            :rtype: int
         """
-        if len(nums) == 0:
+        if not nums:
             return -1
 
         left, right = 0, len(nums) - 1
@@ -68,7 +68,7 @@ class Solution:
             :type target: int
             :rtype: int
         """
-        if len(nums) == 0:
+        if not nums:
             return -1
 
         left, right = 0, len(nums)
@@ -100,7 +100,7 @@ class Solution:
         :type target: int
         :rtype: int
         """
-        if len(nums) == 0:
+        if not nums:
             return -1
 
         left, right = 0, len(nums) - 1

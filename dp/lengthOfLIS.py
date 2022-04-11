@@ -25,7 +25,7 @@ from typing import List
 
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        if len(nums) == 0:
+        if not nums:
             return 0
         seq = [nums[0]]
         # print(seq)

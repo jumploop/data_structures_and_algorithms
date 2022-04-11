@@ -30,7 +30,7 @@ def inorderTraversal(node):
         return
     stack = []
     pos = node
-    while pos or len(stack) > 0:
+    while pos or stack:
         if pos:
             stack.append(pos)
             pos = pos.left

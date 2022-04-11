@@ -65,7 +65,7 @@ class Solution:
             fast = fast.next.next
         if fast:
             slow = slow.next
-        while len(s) > 0:
+        while s:
             if slow.val != s.pop():
                 return False
             slow = slow.next

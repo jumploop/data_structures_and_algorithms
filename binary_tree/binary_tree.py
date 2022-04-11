@@ -126,10 +126,9 @@ class Tree(object):
         if root is None:
             return
 
-        stack1 = []
         stack2 = []
         node = root
-        stack1.append(node)
+        stack1 = [node]
         # 这个while循环的功能是找出后序遍历的逆序，存在stack2里面
         while stack1:
             node = stack1.pop()
@@ -149,9 +148,8 @@ class Tree(object):
         if root is None:
             return
 
-        queue = []
         node = root
-        queue.append(node)
+        queue = [node]
         while queue:
             node = queue.pop(0)
             print(node.element)

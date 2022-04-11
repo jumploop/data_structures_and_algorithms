@@ -27,9 +27,7 @@ def layerTraverse(node):
             queue.append(tmp.right)
 
 def maxDepth(root):
-    if not root:
-        return 0
-    return 1 + max(maxDepth(root.left), maxDepth(root.right))
+    return 1 + max(maxDepth(root.left), maxDepth(root.right)) if root else 0
 
 
 if __name__ == '__main__':

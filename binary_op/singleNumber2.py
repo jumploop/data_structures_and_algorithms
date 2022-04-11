@@ -30,10 +30,7 @@ class Solution:
         # 统计每位1的个数
         result = 0
         for i in range(64):
-            sum = 0
-            for j in range(len(nums)):
-                # 统计1的个数
-                sum += (nums[j] >> i) & 1
+            sum = sum(num >> i & 1 for num in nums)
             # 还原位00^10=10 或者用| 也可以
             result ^= (sum % 3) << i
         return result

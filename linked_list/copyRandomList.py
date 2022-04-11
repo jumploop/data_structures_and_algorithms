@@ -55,7 +55,7 @@ Node.random 为空（null）或指向链表中的节点。
 
 class Node:
     def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
-        self.val = int(x)
+        self.val = x
         self.next = next
         self.random = random
 

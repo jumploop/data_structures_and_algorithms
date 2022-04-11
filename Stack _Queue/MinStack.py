@@ -63,19 +63,14 @@ class MinStack:
     def pop(self) -> None:
         if not self.stack:
             return
-        self.stack = self.stack[:len(self.stack) - 1]
-        self.min = self.min[:len(self.min) - 1]
+        self.stack = self.stack[:-1]
+        self.min = self.min[:-1]
 
     def top(self) -> int:
-        if not self.stack:
-            return 0
-        return self.stack[len(self.stack) - 1]
+        return self.stack[len(self.stack) - 1] if self.stack else 0
 
     def getMin(self) -> int:
-        if len(self.min) == 0:
-            return 1 << 31
-        min = self.min[len(self.min) - 1]
-        return min
+        return 1 << 31 if len(self.min) == 0 else self.min[len(self.min) - 1]
 
 
 # Your MinStack object will be instantiated and called as such:

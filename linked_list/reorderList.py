@@ -68,5 +68,5 @@ class Solution:
                 l2 = l2.next
             toggle = not toggle
             head = head.next
-        head.next = l1 if l1 else l2
+        head.next = l1 or l2
         return dummy.next

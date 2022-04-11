@@ -49,11 +49,7 @@ class Solution:
         result = []
         self.inOrder(root, result)
         print(result)
-        # check order
-        for i in range(len(result) - 1):
-            if result[i] >= result[i + 1]:
-                return False
-        return True
+        return all(result[i] < result[i + 1] for i in range(len(result) - 1))
 
     def inOrder(self, root, result):
         if not root:

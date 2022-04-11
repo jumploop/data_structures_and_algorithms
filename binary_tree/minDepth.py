@@ -19,13 +19,12 @@ class Solution:
         ans, count = [root], 1
         while ans:
             n = len(ans)
-            for i in range(n):
-                r = ans.pop(0)
-                if r:
+            for _ in range(n):
+                if r := ans.pop(0):
                     if not r.left and not r.right:
                         return count
-                    ans.append(r.left if r.left else [])
-                    ans.append(r.right if r.right else [])
+                    ans.append(r.left or [])
+                    ans.append(r.right or [])
             count += 1
 
 

@@ -62,15 +62,14 @@ class Solution:
         m, n = len(grid), len(grid[0])
 
         def dfs_iter(i, j):
-            dfs = []
-            dfs.append((i, j))
-            while len(dfs) > 0:
+            dfs = [(i, j)]
+            while dfs:
                 i, j = dfs.pop()
                 if grid[i][j] == '1':
                     grid[i][j] = '0'
-                    if i - 1 >= 0:
+                    if i >= 1:
                         dfs.append((i - 1, j))
-                    if j - 1 >= 0:
+                    if j >= 1:
                         dfs.append((i, j - 1))
                     if i + 1 < m:
                         dfs.append((i + 1, j))

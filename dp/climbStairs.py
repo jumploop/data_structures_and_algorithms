@@ -32,9 +32,9 @@
 
 class Solution:
     def climbStairs(self, n: int) -> int:
-        if n == 0 or n == 1:
+        if n in {0, 1}:
             return n
-        f = [0 for i in range(n + 1)]
+        f = [0 for _ in range(n + 1)]
         print(f)
         f[1] = 1
         f[2] = 2
@@ -45,7 +45,7 @@ class Solution:
 
     def climbStairs2(self, n: int) -> int:
         a, b = 1, 1
-        for i in range(n):
+        for _ in range(n):
             a, b = b, a + b
         return a
 
