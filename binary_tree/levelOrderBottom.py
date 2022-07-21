@@ -1,74 +1,36 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Time    : 2020/6/28 10:25
-# @Author  : 一叶知秋
-# @File    : levelOrderBottom.py
-# @Software: PyCharm
 """
-107. 二叉树的层次遍历 II
-给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
-
-例如：
-给定二叉树 [3,9,20,null,null,15,7],
-
-    3
-   / \
-  9  20
-    /  \
-   15   7
-返回其自底向上的层次遍历为：
-
-[
-  [15,7],
-  [9,20],
-  [3]
-]
+给你二叉树的根节点 root ，返回其节点值 自底向上的层序遍历 。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
 """
-# 思路：在层级遍历的基础上，翻转一下结果即可
-
 # Definition for a binary tree node.
 from typing import List
 
 
 class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 
 class Solution:
+
     def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
         result = []
-        if not root:
+        if root is None:
             return result
         queue = [root]
         while queue:
-            length = len(queue)
-            level = []
-            for _ in range(length):
-                node = queue.pop(0)
-                level.append(node.val)
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-            result.append(level)
+            tmp = []
+            #  记录当前层有多少元素（遍历当前层，再添加下一层）
+            for _ in range(len(queue)):
+                # 出队列
+                level = queue[0]
+                queue = queue[1:]
+                tmp.append(level.val)
+                if level.left:
+                    queue.append(level.left)
+                if level.right:
+                    queue.append(level.right)
+            result.append(tmp)
         return result[::-1]
-
-
-if __name__ == '__main__':
-    a = TreeNode(1)
-    b = TreeNode(2)
-    c = TreeNode(3)
-    d = TreeNode(4)
-    e = TreeNode(5)
-    f = TreeNode(6)
-
-    a.left = b
-    a.right = c
-    b.left = d
-    b.right = e
-    c.left = f
-
-    print(Solution().levelOrderBottom(a))

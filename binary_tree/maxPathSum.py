@@ -1,75 +1,47 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2020/6/27 17:54
-# @Author  : 一叶知秋
-# @File    : maxPathSum.py
-# @Software: PyCharm
-
 """
-124. 二叉树中的最大路径和
-给定一个非空二叉树，返回其最大路径和。
+路径 被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中 至多出现一次 。该路径 至少包含一个 节点，且不一定经过根节点。
 
-本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。
+路径和 是路径中各节点值的总和。
 
-示例 1:
+给你一个二叉树的根节点 root ，返回其 最大路径和 。
 
-输入: [1,2,3]
-
-       1
-      / \
-     2   3
-
-输出: 6
-示例 2:
-
-输入: [-10,9,20,null,null,15,7]
-
-   -10
-   / \
-  9  20
-    /  \
-   15   7
-
-输出: 42
+来源：力扣（LeetCode）
+链接：https://leetcode.cn/problems/binary-tree-maximum-path-sum
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
-
-# 思路：分治法，分为三种情况：左子树最大路径和最大，右子树最大路径和最大，左右子树最大加根节点最大，需要保存两个变量：一个保存子树最大路径和，一个保存左右加根节点和，然后比较这个两个变量选择最大值即可
-from collections import namedtuple
-
-
 # Definition for a binary tree node.
+from typing import Optional
+
+
 class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 
 class Solution:
 
-    def maxPathSum(self, root: TreeNode) -> int:
-        self.maxsum = float('-inf')
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        self.maxPath = float('-inf')
 
-        def dfs(root):
-            if not root:
-                return 0
-            left = dfs(root.left)
-            right = dfs(root.right)
-            self.maxsum = max(self.maxsum, left + right + root.val)
-            return max(0, max(left, right) + root.val)
+        def helper(node):
+            # base case
+            if node is None:
+                return float('-inf')
+            # 递归计算左右子节点的最大贡献值
+            # 只有在最大贡献值大于 0 时，才会选取对应子节点
+            leftGain = max(helper(node.left), 0)
+            rightGain = max(helper(node.right), 0)
+            # 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值
+            priceNewpath = node.val + leftGain + rightGain
+            # 更新答案
+            self.maxPath = max(self.maxPath, priceNewpath)
+            # 返回节点的最大贡献值
+            return node.val + max(leftGain, rightGain)
 
-        print(dfs(root))
-        return self.maxsum
-
-
-# 作者：821218213
-# 链接：https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/solution/124di-gui-de-jing-sui-ji-lu-yi-xia-by-821218213/
-# 来源：力扣（LeetCode）
-# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-if __name__ == '__main__':
-    a = TreeNode(1)
-    b = TreeNode(2)
-    c = TreeNode(3)
-    a.left = b
-    a.right = c
-    print(Solution().maxPathSum(a))
+        helper(root)
+        return self.maxPath
