@@ -1,47 +1,32 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2020/7/9 15:44
-# @Author  : 一叶知秋
-# @File    : findMin.py
-# @Software: PyCharm
 """
-153. 寻找旋转排序数组中的最小值
-假设按照升序排序的数组在预先未知的某个点上进行了旋转。
+已知一个长度为 n 的数组，预先按照升序排列，经由 1 到 n 次 旋转 后，得到输入数组。例如，原数组 nums = [0,1,2,4,5,6,7] 在变化后可能得到：
+若旋转 4 次，则可以得到 [4,5,6,7,0,1,2]
+若旋转 7 次，则可以得到 [0,1,2,4,5,6,7]
+注意，数组 [a[0], a[1], a[2], ..., a[n-1]] 旋转一次 的结果为数组 [a[n-1], a[0], a[1], a[2], ..., a[n-2]] 。
 
-( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。
+给你一个元素值 互不相同 的数组 nums ，它原来是一个升序排列的数组，并按上述情形进行了多次旋转。请你找出并返回数组中的 最小元素 。
 
-请找出其中最小的元素。
+你必须设计一个时间复杂度为 O(log n) 的算法解决此问题。
 
-你可以假设数组中不存在重复元素。
+ 
 
-示例 1:
-
-输入: [3,4,5,1,2]
-输出: 1
-示例 2:
-
-输入: [4,5,6,7,0,1,2]
-输出: 0
+来源：力扣（LeetCode）
+链接：https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
 from typing import List
 
 
 class Solution:
-    def findMin(self, nums: List[int]) -> int:
-        return min(nums)
 
-    def findMin2(self, nums: List[int]) -> int:
-        # 思路：最后一个值作为target，然后往左移动，最后比较start、end的值
-        if not nums:
-            return -1
+    def findMin(self, nums: List[int]) -> int:
         left, right = 0, len(nums) - 1
-        while left + 1 < right:
-            mid = (left + right) >> 1
-            # 最后一个元素值为target
-            if nums[mid] <= nums[right]:
-                right = mid
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] > nums[right]:
+                left = mid + 1
             else:
-                left = mid
-        if nums[left] > nums[right]:
-            return nums[right]
+                right = mid
         return nums[left]
