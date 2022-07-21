@@ -1,49 +1,31 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Time    : 2020/6/28 21:22
-# @Author  : 一叶知秋
-# @File    : deleteDuplicates2.py
-# @Software: PyCharm
-
 """
-82. 删除排序链表中的重复元素 II
-给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 没有重复出现 的数字。
-
-示例 1:
-
-输入: 1->2->3->3->4->4->5
-输出: 1->2->5
-示例 2:
-
-输入: 1->1->1->2->3
-输出: 2->3
+给定一个已排序的链表的头 head ， 删除原始链表中所有重复数字的节点，只留下不同的数字 。返回 已排序的链表 。
 """
-
-
-# 思路：链表头结点可能被删除，所以用 dummy node 辅助删除
-
 # Definition for singly-linked list.
+from multiprocessing import dummy
+
+
 class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 
 class Solution:
+
     def deleteDuplicates(self, head: ListNode) -> ListNode:
-        if not head:
+        if head is None:
             return head
-        dummy = ListNode(0)
-        dummy.next=head
+        dummy = ListNode(next=head)
         head = dummy
+        rmval = None
         while head.next and head.next.next:
             if head.next.val == head.next.next.val:
                 # 记录已经删除的值，用于后续节点判断
-                rmVal = head.next.val
-                while head.next and head.next.val == rmVal:
+                rmval = head.next.val
+                while head.next and head.next.val == rmval:
                     head.next = head.next.next
             else:
                 head = head.next
         return dummy.next
-
-        # 注意点 • A->B->C 删除 B，A.next = C • 删除用一个 Dummy Node 节点辅助（允许头节点可变） • 访问 X.next 、X.value 一定要保证 X != nil
